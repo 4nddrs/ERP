@@ -38,7 +38,7 @@
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="<?= base_url('inicio'); ?>">
                 <img src="<?= base_url('images/logo1.png'); ?>" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold">Inventario</span>
+                <span class="ms-1 font-weight-bold">Dev-Sync</span>
             </a>
         </div>
         <hr class="horizontal dark mt-0">
@@ -120,6 +120,7 @@
     <script src="<?= base_url('assets/datatables/datatables.min.js'); ?>"></script>
 
     <?php $this->renderSection('script'); ?>
+    <?= $this->renderSection('content') ?>
 
 </body>
 

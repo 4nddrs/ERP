@@ -1,66 +1,96 @@
-<?php
+<?= $this->extend('plantilla/layout') ?>
+<?= $this->section('contentido') ?>
 
-$this->extend('plantilla/layout');
-$this->section('contentido');
-
-?>
-
-<h4 class="mt-3">Nuevo empleado</h4>
-
-<?php if (session()->getFlashdata('errors')) : ?>
-    <div class="alert alert-danger alert-dismissible fade show col-md-6">
-        <?= session()->getFlashdata('errors'); ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-<?php endif; ?>
-
-<form class="row g-3" method="post" action="<?= base_url('empleados'); ?>" autocomplete="off">
-    <?= csrf_field(); ?>
-
-    <div class="col-12">
-        <p class="fst-italic">Campos marcados con <span class="text-danger">*</span> son obligatorios.</p>
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Nuevo Empleado</h4>
+        <a href="<?= base_url('empleados') ?>" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-left me-1"></i> Volver
+        </a>
     </div>
 
-    <div class="col-md-3">
-        <label for="usuario" class="form-label"><span class="text-danger">*</span> Usuario</label>
-        <input type="text" class="form-control" id="usuario" name="usuario" value="<?= set_value('usuario'); ?>" required autofocus>
-    </div>
+    <?php if (isset($errors)) : ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php foreach ($errors as $error) : ?>
+                    <li><?= esc($error) ?></li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
-    <div class="col-md-9">
-        <label for="nombre" class="form-label"><span class="text-danger">*</span> Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" value="<?= set_value('nombre'); ?>" required>
-    </div>
+    <form action="<?= base_url('empleados/create') ?>" method="post" novalidate>
+        <?= csrf_field() ?>
 
-    <div class="col-md-4">
-        <label for="password" class="form-label"><span class="text-danger">*</span> Contraseña</label>
-        <input type="password" class="form-control" id="password" name="password" value="<?= set_value('password'); ?>" required>
-    </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" value="<?= old('nombre') ?>" required>
+        </div>
 
-    <div class="form-group col-md-4">
-        <label for="id_sucursal">Sucursal</label>
-        <select id="id_sucursal" name="id_sucursal" class="form-control">
-            <option value="">Seleccionar</option>
-            <?php foreach ($sucursales as $sucursal) : ?>
-                <option value="<?= $sucursal['id']; ?>"><?= $sucursal['nombre']; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" name="apellido" id="apellido" class="form-control" value="<?= old('apellido') ?>" required>
+        </div>
 
-    <div class="form-group col-md-4">
-        <label for="id_rol">Rol</label>
-        <select id="id_rol" name="id_rol" class="form-control">
-            <option value="">Seleccionar</option>
-            <?php foreach ($roles as $rol) : ?>
-                <option value="<?= $rol['id']; ?>"><?= $rol['nombre']; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" name="correo" id="correo" class="form-control" value="<?= old('correo') ?>" required>
+        </div>
 
-    <div class="text-end">
-        <a href="<?= base_url('empleados'); ?>" class="btn btn-secondary">Regresar</a>
-        <button class="btn btn-success" type="submit">Guardar</button>
-    </div>
-</form>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" name="telefono" id="telefono" class="form-control" value="<?= old('telefono') ?>">
+        </div>
 
-<?php $this->endSection(); ?>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <textarea name="direccion" id="direccion" class="form-control"><?= old('direccion') ?></textarea>
+        </div>
 
+        <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" value="<?= old('fecha_nacimiento') ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha_ingreso" class="form-label">Fecha de Ingreso</label>
+            <input type="date" name="fecha_ingreso" id="fecha_ingreso" class="form-control" value="<?= old('fecha_ingreso') ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="cargo" class="form-label">Cargo</label>
+            <input type="text" name="cargo" id="cargo" class="form-control" value="<?= old('cargo') ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="departamento" class="form-label">Departamento</label>
+            <input type="text" name="departamento" id="departamento" class="form-control" value="<?= old('departamento') ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="sueldo" class="form-label">Sueldo</label>
+            <input type="number" step="0.01" name="sueldo" id="sueldo" class="form-control" value="<?= old('sueldo') ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="horas_trabajo_semana" class="form-label">Horas de trabajo por semana</label>
+            <input type="number" name="horas_trabajo_semana" id="horas_trabajo_semana" class="form-control" value="<?= old('horas_trabajo_semana') ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="estado" class="form-label">Estado</label>
+            <select name="estado" id="estado" class="form-select" required>
+                <option value="">Selecciona...</option>
+                <option value="activo" <?= old('estado') == 'activo' ? 'selected' : '' ?>>Activo</option>
+                <option value="inactivo" <?= old('estado') == 'inactivo' ? 'selected' : '' ?>>Inactivo</option>
+                <option value="licencia" <?= old('estado') == 'licencia' ? 'selected' : '' ?>>Licencia</option>
+                <option value="suspendido" <?= old('estado') == 'suspendido' ? 'selected' : '' ?>>Suspendido</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="<?= base_url('empleados') ?>" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<?= $this->endSection() ?>

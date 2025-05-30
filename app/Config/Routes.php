@@ -49,3 +49,21 @@ $routes->post('reportes/procesarImportacion', 'Reportes::procesarImportacion', [
 // Usuarios
 $routes->get('perfil/cambiarClave', 'Login::cambiaPassword', ["filter" => "auth"]);
 $routes->post('perfil/cambiarClave', 'Login::actualizaPassword', ["filter" => "auth"]);
+
+// Empleados
+// Empleados
+$routes->get('empleados', 'Empleados::index', ['filter' => 'auth']);
+$routes->get('empleados/new', 'Empleados::new', ['filter' => 'auth']);
+$routes->post('empleados/create', 'Empleados::create', ['filter' => 'auth']);
+$routes->get('empleados/edit/(:num)', 'Empleados::edit/$1', ['filter' => 'auth']);
+$routes->put('empleados/(:num)', 'Empleados::update/$1', ['filter' => 'auth']);
+
+$routes->post('empleados/update/(:num)', 'Empleados::update/$1', ['filter' => 'auth']);
+$routes->get('empleados/delete/(:num)', 'Empleados::delete/$1', ['filter' => 'auth']);
+
+$routes->post('empleados/update/(:num)', 'Empleados::update/$1');
+
+$routes->delete('empleados/(:num)', 'Empleados::delete/$1');
+
+
+

@@ -19,6 +19,7 @@
             'roles' => ['class' => 'roles', 'icon' => 'fa-key'],
             'usuarios' => ['class' => 'usuarios', 'icon' => 'fa-user'],
             'sucursal' => ['class' => 'sucursal', 'icon' => 'fa-cog'],
+            'empleados' => ['class' => 'empleados', 'icon' => 'fa-users-cog'],
             // Agrega más rutas según sea necesario
         ];
 
